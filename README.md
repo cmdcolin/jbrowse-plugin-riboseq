@@ -76,3 +76,10 @@ Use the RiboSeqAdapter and then use a BedTabixAdapter subadapter
   ]
 }
 ```
+
+## Footnote
+
+Motivated by https://www.biostars.org/p/9591324/#9591469
+
+This is very demo-quality. Inspired by plugins like
+https://github.com/cmdcolin/mpileupplugin also
