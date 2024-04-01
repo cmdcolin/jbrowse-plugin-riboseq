@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    {
+      "name": "RiboSeq",
+      "url": "http://localhost:9000/dist/jbrowse-plugin-ribo-seq.umd.development.js"
+    }
+  ],
+  "tracks": [
+    {
+      "type": "CustomTrackType",
+      "adapter": {
+        "type": "RiboSeqAdapter",
+        "bedGzLocation": { "uri": "test.bed" },
+        "index": { "location": { "uri": "test.bed.tbi" } }
+      }
+    }
+  ]
+}
