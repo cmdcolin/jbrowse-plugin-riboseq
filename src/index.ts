@@ -1,50 +1,50 @@
-import Plugin from "@jbrowse/core/Plugin";
-import PluginManager from "@jbrowse/core/PluginManager";
-import DisplayType from "@jbrowse/core/pluggableElementTypes/DisplayType";
+import Plugin from '@jbrowse/core/Plugin'
+import PluginManager from '@jbrowse/core/PluginManager'
+import DisplayType from '@jbrowse/core/pluggableElementTypes/DisplayType'
 import rendererFactory, {
   configSchema as rendererConfigSchema,
-} from "./LinearManhattanRenderer";
+} from './LinearRiboSeqRenderer'
 import {
   configSchemaFactory as displayConfigSchemaFactory,
   stateModelFactory as displayModelFactory,
-} from "./LinearManhattanDisplay";
+} from './LinearRiboSeqDisplay'
 
 export default class AlignmentsPlugin extends Plugin {
-  name = "GWASPlugin";
+  name = 'GWASPlugin'
 
   install(pluginManager: PluginManager) {
     const WigglePlugin = pluginManager.getPlugin(
-      "WigglePlugin",
-    ) as import("@jbrowse/plugin-wiggle").default;
+      'WigglePlugin',
+    ) as import('@jbrowse/plugin-wiggle').default
 
     const {
       LinearWiggleDisplayReactComponent,
       XYPlotRendererReactComponent,
       //@ts-ignore
-    } = WigglePlugin.exports;
+    } = WigglePlugin.exports
 
     pluginManager.addDisplayType(() => {
-      const configSchema = displayConfigSchemaFactory(pluginManager);
+      const configSchema = displayConfigSchemaFactory(pluginManager)
       return new DisplayType({
-        name: "LinearManhattanDisplay",
+        name: 'LinearRiboSeqDisplay',
         configSchema,
         stateModel: displayModelFactory(pluginManager, configSchema),
-        trackType: "FeatureTrack",
-        viewType: "LinearGenomeView",
+        trackType: 'FeatureTrack',
+        viewType: 'LinearGenomeView',
         ReactComponent: LinearWiggleDisplayReactComponent,
-      });
-    });
+      })
+    })
 
     pluginManager.addRendererType(() => {
       //@ts-ignore
-      const ManhattanRenderer = new rendererFactory(pluginManager);
-      const configSchema = rendererConfigSchema;
-      return new ManhattanRenderer({
-        name: "LinearManhattanRenderer",
+      const RiboSeqRenderer = new rendererFactory(pluginManager)
+      const configSchema = rendererConfigSchema
+      return new RiboSeqRenderer({
+        name: 'LinearRiboSeqRenderer',
         ReactComponent: XYPlotRendererReactComponent,
         configSchema,
         pluginManager,
-      });
-    });
+      })
+    })
   }
 }

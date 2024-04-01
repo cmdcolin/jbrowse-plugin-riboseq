@@ -1,8 +1,8 @@
 import { ConfigurationSchema } from "@jbrowse/core/configuration";
-export { default } from "./LinearManhattanRenderer";
+export { default } from "./LinearRiboSeqRenderer";
 
 export const configSchema = ConfigurationSchema(
-  "LinearManhattanRenderer",
+  "LinearRiboSeqRenderer",
   {
     color: {
       type: "color",

@@ -56,7 +56,7 @@ export default function rendererFactory(pluginManager: PluginManager) {
     //@ts-ignore
   } = WigglePlugin.exports
 
-  return class ManhattanPlotRenderer extends WiggleBaseRenderer {
+  return class RiboSeqPlotRenderer extends WiggleBaseRenderer {
     // @ts-expect-error
     draw(ctx: CanvasRenderingContext2D, props: any) {
       const {

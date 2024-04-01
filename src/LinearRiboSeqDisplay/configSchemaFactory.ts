@@ -9,11 +9,11 @@ export function configSchemaFactory(pluginManager: PluginManager) {
   //@ts-ignore
   const { baseLinearDisplayConfigSchema } = LGVPlugin.exports;
 
-  const LinearManhattanRendererConfigSchema = pluginManager.getRendererType(
-    "LinearManhattanRenderer",
+  const LinearRiboSeqRendererConfigSchema = pluginManager.getRendererType(
+    "LinearRiboSeqRenderer",
   ).configSchema;
   return ConfigurationSchema(
-    "LinearManhattanDisplay",
+    "LinearRiboSeqDisplay",
     {
       autoscale: {
         type: "stringEnum",
@@ -62,7 +62,7 @@ export function configSchemaFactory(pluginManager: PluginManager) {
         defaultValue: "xyplot",
       },
       renderers: ConfigurationSchema("RenderersConfiguration", {
-        LinearManhattanRenderer: LinearManhattanRendererConfigSchema,
+        LinearRiboSeqRenderer: LinearRiboSeqRendererConfigSchema,
       }),
     },
     { baseConfiguration: baseLinearDisplayConfigSchema, explicitlyTyped: true },

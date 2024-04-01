@@ -12,15 +12,15 @@ export function stateModelFactory(
   //@ts-ignore
   const { linearWiggleDisplayModelFactory } = WigglePlugin.exports;
   return types.compose(
-    "LinearManhattanDisplay",
+    "LinearRiboSeqDisplay",
     linearWiggleDisplayModelFactory(pluginManager, configSchema),
     types
       .model({
-        type: types.literal("LinearManhattanDisplay"),
+        type: types.literal("LinearRiboSeqDisplay"),
       })
       .views(() => ({
         get rendererTypeName() {
-          return "LinearManhattanRenderer";
+          return "LinearRiboSeqRenderer";
         },
         get needsScalebar() {
           return true;
@@ -32,4 +32,4 @@ export function stateModelFactory(
   );
 }
 
-export type LinearManhattanDisplayModel = ReturnType<typeof stateModelFactory>;
+export type LinearRiboSeqDisplayModel = ReturnType<typeof stateModelFactory>;
