@@ -1,11 +1,11 @@
-# jbrowse-plugin-riboseq
+# jbrowse-plugin-ribo-seq
 
 ## Dev setup
 
 ```bash
 
-git clone git@github.com:cmdcolin/jbrowse-plugin-riboseq
-cd jbrowse-plugin-riboseq
+git clone git@github.com:cmdcolin/jbrowse-plugin-ribo-seq
+cd jbrowse-plugin-ribo-seq
 yarn
 yarn start
 # visit http://yourjbrowse/?config=http://localhost:9000/config.json
@@ -16,9 +16,12 @@ yarn start
 
 ```json
 {
-  "plugins": {
-    "url": "http"
-  }
+  "plugins": [
+    {
+      "name": "RiboSeq",
+      "url": "https://unpkg.com/jbrowse-plugin-ribo-seq/dist/jbrowse-plugin-ribo-seq.umd.production.min.js"
+    }
+  ]
 }
 ```
 
@@ -47,7 +50,7 @@ Use the RiboSeqAdapter and then use a BedTabixAdapter subadapter
 ```json
 {
   "type": "FeatureTrack",
-  "trackId": "riboseq_track",
+  "trackId": "ribo-seq_track",
   "name": "RiboSeq",
   "assemblyNames": ["hg19"],
   "adapter": {
@@ -67,7 +70,7 @@ Use the RiboSeqAdapter and then use a BedTabixAdapter subadapter
   },
   "displays": [
     {
-      "displayId": "riboseq_display",
+      "displayId": "ribo-seq_display",
       "type": "LinearRiboSeqDisplay"
     }
   ]

@@ -38,7 +38,7 @@
   "tracks": [
     {
       "type": "FeatureTrack",
-      "trackId": "riboseq_track",
+      "trackId": "ribo-seq_track",
       "name": "RiboSeq",
       "assemblyNames": ["hg19"],
       "adapter": {
@@ -56,7 +56,7 @@
       },
       "displays": [
         {
-          "displayId": "riboseq_display",
+          "displayId": "ribo-seq_display",
           "type": "LinearRiboSeqDisplay"
         }
       ]
@@ -112,14 +112,14 @@
           {
             "id": "OOnmKf8emreSXqKiXb4o_",
             "type": "FeatureTrack",
-            "configuration": "riboseq_track",
+            "configuration": "ribo-seq_track",
             "minimized": false,
             "displays": [
               {
                 "id": "cIU5IgZwQJlMWxIgvncxV",
                 "type": "LinearRiboSeqDisplay",
                 "heightPreConfig": 338,
-                "configuration": "riboseq_display",
+                "configuration": "ribo-seq_display",
                 "selectedRendering": "",
                 "resolution": 1,
                 "constraints": {}

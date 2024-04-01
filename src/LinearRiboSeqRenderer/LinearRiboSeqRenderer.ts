@@ -19,7 +19,6 @@ export default function rendererFactory(pluginManager: PluginManager) {
         features,
         regions,
         bpPerPx,
-        config,
         scaleOpts,
         height: unadjustedHeight,
         displayCrossHatches,
@@ -36,7 +35,10 @@ export default function rendererFactory(pluginManager: PluginManager) {
       const toHeight = (n: number) => toY(originY) - toY(n)
       const originY = 0
 
-      const colors = { 0: 'yellow', 1: 'green', 2: 'red', 3: 'blue' }
+      const colors = { 0: 'yellow', 1: 'green', 2: 'red', 3: 'blue' } as Record<
+        string,
+        string
+      >
       for (const feature of features.values()) {
         const [leftPx, rightPx] = featureSpanPx(feature, region, bpPerPx)
         const score = feature.get('score') as number
