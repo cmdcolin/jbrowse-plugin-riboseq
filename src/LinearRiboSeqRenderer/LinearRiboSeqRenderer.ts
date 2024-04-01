@@ -1,50 +1,7 @@
 import PluginManager from '@jbrowse/core/PluginManager'
 import { readConfObject } from '@jbrowse/core/configuration'
 import { featureSpanPx } from '@jbrowse/core/util'
-
-function drawBranch(
-  ctx: CanvasRenderingContext2D,
-  branchLength: number,
-  direction: number,
-) {
-  ctx.save()
-  ctx.rotate((direction * Math.PI) / 3)
-  ctx.moveTo(0, 0)
-  ctx.lineTo(branchLength, 0)
-  ctx.stroke()
-  ctx.restore()
-}
-
-function drawSegment(
-  ctx: CanvasRenderingContext2D,
-  segmentLength: number,
-  branchLength: number,
-) {
-  ctx.beginPath()
-  ctx.moveTo(0, 0)
-  ctx.lineTo(segmentLength, 0)
-  ctx.stroke()
-  ctx.translate(segmentLength, 0)
-  if (branchLength > 0) {
-    drawBranch(ctx, branchLength, 1)
-    drawBranch(ctx, branchLength, -1)
-  }
-}
-
-function drawSnowflake(ctx: CanvasRenderingContext2D, width = 5, height = 5) {
-  ctx.lineWidth = 1
-  ctx.lineCap = 'round'
-  ctx.strokeStyle = 'blue'
-  ctx.translate(width / 2, height / 2)
-  for (var count = 0; count < 6; count++) {
-    ctx.save()
-    drawSegment(ctx, 2, 0.5)
-    drawSegment(ctx, 2, 1)
-    drawSegment(ctx, 2, 0)
-    ctx.restore()
-    ctx.rotate(Math.PI / 3)
-  }
-}
+import { getOrigin } from '@jbrowse/plugin-wiggle'
 
 export default function rendererFactory(pluginManager: PluginManager) {
   const WigglePlugin = pluginManager.getPlugin(
@@ -53,7 +10,6 @@ export default function rendererFactory(pluginManager: PluginManager) {
   const {
     utils: { getScale },
     WiggleBaseRenderer,
-    //@ts-ignore
   } = WigglePlugin.exports
 
   return class RiboSeqPlotRenderer extends WiggleBaseRenderer {
@@ -77,16 +33,16 @@ export default function rendererFactory(pluginManager: PluginManager) {
 
       const scale = getScale(opts)
       const toY = (n: number) => height - scale(n) + YSCALEBAR_LABEL_OFFSET
+      const toHeight = (n: number) => toY(originY) - toY(n)
+      const originY = 0
 
+      const colors = { 0: 'yellow', 1: 'green', 2: 'red', 3: 'blue' }
       for (const feature of features.values()) {
-        const [leftPx] = featureSpanPx(feature, region, bpPerPx)
+        const [leftPx, rightPx] = featureSpanPx(feature, region, bpPerPx)
         const score = feature.get('score') as number
-        // @ts-ignore
-        ctx.fillStyle = readConfObject(config, 'color', { feature })
-        ctx.save()
-        ctx.translate(leftPx, toY(score))
-        drawSnowflake(ctx)
-        ctx.restore()
+        ctx.fillStyle = colors[feature.get('color')] as string
+        const w = Math.max(rightPx - leftPx, 10)
+        ctx.fillRect(leftPx, toY(score), w, toHeight(score))
       }
 
       if (displayCrossHatches) {

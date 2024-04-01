@@ -1,35 +1,34 @@
-import PluginManager from "@jbrowse/core/PluginManager";
-export { configSchemaFactory } from "./configSchemaFactory";
+import PluginManager from '@jbrowse/core/PluginManager'
+export { configSchemaFactory } from './configSchemaFactory'
 
 export function stateModelFactory(
   pluginManager: PluginManager,
   configSchema: any,
 ) {
-  const { types } = pluginManager.lib["mobx-state-tree"];
+  const { types } = pluginManager.lib['mobx-state-tree']
   const WigglePlugin = pluginManager.getPlugin(
-    "WigglePlugin",
-  ) as import("@jbrowse/plugin-wiggle").default;
-  //@ts-ignore
-  const { linearWiggleDisplayModelFactory } = WigglePlugin.exports;
+    'WigglePlugin',
+  ) as import('@jbrowse/plugin-wiggle').default
+  const { linearWiggleDisplayModelFactory } = WigglePlugin.exports
   return types.compose(
-    "LinearRiboSeqDisplay",
+    'LinearRiboSeqDisplay',
     linearWiggleDisplayModelFactory(pluginManager, configSchema),
     types
       .model({
-        type: types.literal("LinearRiboSeqDisplay"),
+        type: types.literal('LinearRiboSeqDisplay'),
       })
       .views(() => ({
         get rendererTypeName() {
-          return "LinearRiboSeqRenderer";
+          return 'LinearRiboSeqRenderer'
         },
         get needsScalebar() {
-          return true;
+          return true
         },
         get regionTooLarge() {
-          return false;
+          return false
         },
       })),
-  );
+  )
 }
 
-export type LinearRiboSeqDisplayModel = ReturnType<typeof stateModelFactory>;
+export type LinearRiboSeqDisplayModel = ReturnType<typeof stateModelFactory>

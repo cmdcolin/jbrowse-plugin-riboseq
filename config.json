@@ -1,0 +1,151 @@
+{
+  "plugins": [
+    {
+      "name": "RiboSeq",
+      "url": "http://localhost:9000/dist/jbrowse-plugin-ribo-seq.umd.development.js"
+    }
+  ],
+  "assemblies": [
+    {
+      "name": "hg19",
+      "aliases": ["GRCh37"],
+      "sequence": {
+        "type": "ReferenceSequenceTrack",
+        "trackId": "Pd8Wh30ei9R",
+        "adapter": {
+          "type": "BgzipFastaAdapter",
+          "fastaLocation": {
+            "uri": "https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz"
+          },
+          "faiLocation": {
+            "uri": "https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz.fai"
+          },
+          "gziLocation": {
+            "uri": "https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz.gzi"
+          }
+        }
+      },
+      "refNameAliases": {
+        "adapter": {
+          "type": "RefNameAliasAdapter",
+          "location": {
+            "uri": "https://s3.amazonaws.com/jbrowse.org/genomes/hg19/hg19_aliases.txt"
+          }
+        }
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "riboseq_track",
+      "name": "RiboSeq",
+      "assemblyNames": ["hg19"],
+      "adapter": {
+        "type": "RiboSeqAdapter",
+        "subadapter": {
+          "type": "BedTabixAdapter",
+          "scoreColumn": "count",
+          "bedGzLocation": {
+            "uri": "test.bed.gz"
+          },
+          "index": {
+            "location": { "uri": "test.bed.gz.tbi" }
+          }
+        }
+      },
+      "displays": [
+        {
+          "displayId": "riboseq_display",
+          "type": "LinearRiboSeqDisplay"
+        }
+      ]
+    }
+  ],
+  "defaultSession": {
+    "drawerPosition": "right",
+    "drawerWidth": 384,
+    "widgets": {
+      "GridBookmark": {
+        "id": "GridBookmark",
+        "type": "GridBookmarkWidget"
+      },
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "initialized": true,
+        "collapsed": {},
+        "view": "5s0jN89zSG4fW6RduUKvI",
+        "faceted": {
+          "filterText": "",
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "minimized": false,
+    "id": "PyyZzvwlnPeiAjsd5cOj7",
+    "name": "New session 4/1/2024, 12:23:20 PM",
+    "margin": 0,
+    "views": [
+      {
+        "id": "5s0jN89zSG4fW6RduUKvI",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "offsetPx": 499999536.09375,
+        "bpPerPx": 0.02,
+        "displayedRegions": [
+          {
+            "refName": "1",
+            "start": 0,
+            "end": 249250621,
+            "reversed": false,
+            "assemblyName": "hg19"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "OOnmKf8emreSXqKiXb4o_",
+            "type": "FeatureTrack",
+            "configuration": "riboseq_track",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "cIU5IgZwQJlMWxIgvncxV",
+                "type": "LinearRiboSeqDisplay",
+                "heightPreConfig": 338,
+                "configuration": "riboseq_display",
+                "selectedRendering": "",
+                "resolution": 1,
+                "constraints": {}
+              }
+            ]
+          }
+        ],
+        "hideHeader": false,
+        "hideHeaderOverview": false,
+        "hideNoTracksActive": false,
+        "trackSelectorType": "hierarchical",
+        "showCenterLine": false,
+        "showCytobandsSetting": true,
+        "trackLabels": "",
+        "showGridlines": true,
+        "colorByCDS": true,
+        "showBookmarkHighlights": true,
+        "showBookmarkLabels": true
+      }
+    ],
+    "sessionTracks": [],
+    "sessionAssemblies": [],
+    "temporaryAssemblies": [],
+    "connectionInstances": [],
+    "sessionConnections": [],
+    "focusedViewId": "5s0jN89zSG4fW6RduUKvI",
+    "sessionPlugins": []
+  }
+}
